@@ -1,17 +1,135 @@
+#include <behaviors/mouse_keys.dtsi>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
 / {
+    behaviors {
+        kpml: key_press_moment_layer {
+            compatible = "zmk,behavior-hold-tap";
+            label = "layer_moment_press_key";
+            bindings = <&mo>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+        };
+
+        layer_layer: layer_layer {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_LAYER";
+            bindings = <&lt>, <&lt>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+        };
+
+        hold_macro: hold_macro {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOLD_MACRO";
+            bindings = <&special_key>, <&kp>;
+
+            #binding-cells = <2>;
+            hold-trigger-on-release;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+        };
+
+        hold_key_tap_layer: hold_key_tap_layer {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOLD_KEY_TAP_LAYER";
+            bindings = <&kp>, <&to>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <150>;
+            hold-trigger-on-release;
+        };
+
+        sticky_key_quick_release: sticky_key_quick_release {
+            compatible = "zmk,behavior-sticky-key";
+            label = "STICKY_KEY_QUICK_RELEASE";
+            bindings = <&kp>;
+            #binding-cells = <1>;
+            release-after-ms = <1000>;
+            quick-release;
+            ignore-modifiers;
+        };
+    };
+
+    macros {
+        special_key: special_key {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&kp LCTRL &kp RIGHT_ALT &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
+            label = "SPECIAL_KEY";
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
-        layer_0 {
+        default_layer {
             bindings = <
-&kp Q  &kp W  &kp E  &kp R    &kp T        &kp Y   &kp U   &kp I      &kp O    &kp P
-&kp A  &kp S  &kp D  &kp F    &kp G        &kp H   &kp J   &kp K      &kp L    &kp SEMI
-&kp Z  &kp X  &kp C  &kp V    &kp B        &kp N   &kp M   &kp COMMA  &kp DOT  &kp FSLH
-                     &kp ESC  &kp SPACE    &kp N1  &kp N2
+&kp Q            &kp W  &hold_macro E E  &kp R                             &kp T            &kp Y        &kp U           &kp I      &hold_macro O O  &kp P
+&hold_macro A A  &kp S  &kp D            &kp F                             &kp G            &kp H        &kp J           &kp K      &kp L            &kp SEMI
+&kp Z            &kp X  &kp C            &kp V                             &kp B            &kp N        &kp M           &kp COMMA  &kp DOT          &kp FSLH
+                                         &hold_key_tap_layer LEFT_SHIFT 4  &kpml 1 SPACE    &kpml 2 TAB  &kpml 3 ESCAPE
+            >;
+        };
+
+        symbol_layer_1 {
+            bindings = <
+&kp RS(GRAVE)  &kp EXCLAMATION  &kp POUND      &kp QUESTION      &trans           &trans                &kp LEFT_BRACKET       &kp RIGHT_BRACKET  &kp LEFT_BRACE     &kp RIGHT_BRACE
+&kp CARET      &kp SLASH        &kp BACKSLASH  &kp PIPE          &kp AMPERSAND    &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp SINGLE_QUOTE   &kp DOUBLE_QUOTES  &kp UNDERSCORE
+&trans         &trans           &trans         &trans            &trans           &trans                &trans                 &trans             &trans             &trans
+                                               &layer_layer 0 0  &trans           &trans                &trans
+            >;
+        };
+
+        symbol_layer_2 {
+            bindings = <
+&trans                              &kp AT_SIGN                           &trans                                  &kp DOLLAR                          &trans    &trans  &trans  &trans  &trans  &trans
+&sticky_key_quick_release LEFT_ALT  &sticky_key_quick_release LEFT_SHIFT  &trans                                  &sticky_key_quick_release LEFT_WIN  &trans    &trans  &trans  &trans  &trans  &trans
+&trans                              &trans                                &sticky_key_quick_release LEFT_CONTROL  &trans                              &trans    &trans  &trans  &trans  &trans  &trans
+                                                                                                                  &layer_layer 0 0                    &trans    &trans  &trans
+            >;
+        };
+
+        number_layer {
+            bindings = <
+&trans  &kp N7  &kp N8  &kp N9            &trans    &trans        &kp LESS_THAN  &kp GREATER_THAN  &kp TILDE  &trans
+&trans  &kp N4  &kp N5  &kp N6            &kp N0    &kp ASTERISK  &kp PLUS       &kp MINUS         &kp EQUAL  &kp PERCENT
+&trans  &kp N1  &kp N2  &kp N3            &trans    &trans        &trans         &trans            &trans     &trans
+                        &layer_layer 0 0  &trans    &trans        &trans
+            >;
+        };
+
+        special_layer {
+            bindings = <
+&to 5         &to 6           &trans            &trans            &trans    &kp RC(C)       &kp RC(Z)  &trans        &kp ENTER  &kp RC(V)
+&kp LEFT_ALT  &kp LEFT_SHIFT  &kp BACKSPACE     &kp LEFT_WIN      &trans    &kp LEFT_ARROW  &kp DOWN   &kp UP_ARROW  &kp RIGHT  &trans
+&trans        &kp DEL         &kp LEFT_CONTROL  &trans            &trans    &trans          &trans     &trans        &trans     &trans
+                                                &layer_layer 0 0  &to 1     &to 2           &to 3
+            >;
+        };
+
+        media_layer {
+            bindings = <
+&trans  &trans  &trans  &trans            &trans    &trans             &trans           &trans      &trans  &trans
+&trans  &trans  &trans  &trans            &trans    &kp C_VOLUME_DOWN  &kp C_VOLUME_UP  &kp K_MUTE  &trans  &trans
+&trans  &trans  &trans  &trans            &trans    &trans             &trans           &trans      &trans  &trans
+                        &layer_layer 0 0  &to 1     &to 2              &to 3
+            >;
+        };
+
+        mouse_layer {
+            bindings = <
+&trans        &trans          &msc SCRL_DOWN     &msc SCRL_UP            &trans    &trans  &trans  &trans  &trans  &trans
+&kp LEFT_ALT  &kp LEFT_SHIFT  &mkp LCLK     &mkp RCLK            &trans    &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &trans
+&trans        &trans          &kp LCTRL  &trans            &trans    &trans  &trans  &trans  &trans  &trans
+                                         &layer_layer 0 0  &to 1     &to 2   &to 3
             >;
         };
     };
 };
+
