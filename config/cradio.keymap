@@ -3,6 +3,7 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/mouse.h>
+#include <dt-bindings/zmk/bt.h>
 
 / {
     input_configs {
@@ -75,12 +76,12 @@
         };
 
         boot_mode_right {
-            bindings = <&bootloader>;
+            bindings = <&sys_reset>;
             key-positions = <5 9 6 7 8>;
         };
 
         boot_mode_left {
-            bindings = <&bootloader>;
+            bindings = <&sys_reset>;
             key-positions = <0 1 2 3 4>;
         };
 
@@ -157,4 +158,3 @@
         };
     };
 };
-
