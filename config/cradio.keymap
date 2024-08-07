@@ -81,10 +81,10 @@
 
         default_layer {
             bindings = <
-&kp Q              &kp W  &kp_hold_kp F23 E  &kp R           &kp T            &kp Y        &kp U          &kp I      &kp_hold_kp F24 O  &kp P
-&kp_hold_kp F22 A  &kp S  &kp D              &kp F           &kp G            &kp H        &kp J          &kp K      &kp L              &kp SEMI
-&kp Z              &kp X  &kp C              &kp V           &kp B            &kp N        &kp M          &kp COMMA  &kp DOT            &kp FSLH
-                                             &kpml 4 ESCAPE  &kpml 1 SPACE    &kpml 2 TAB  &kpml 3 ENTER
+&kp Q              &kp W  &kp_hold_kp F23 E  &kp R          &kp T             &kp Y        &kp U          &kp I      &kp_hold_kp F24 O  &kp P
+&kp_hold_kp F22 A  &kp S  &kp D              &kp F          &kp G             &kp H        &kp J          &kp K      &kp L              &kp SEMI
+&kp Z              &kp X  &kp C              &kp V          &kp B             &kp N        &kp M          &kp COMMA  &kp DOT            &kp FSLH
+                                             &kpml 4 SPACE  &kpml 1 ESCAPE    &kpml 2 TAB  &kpml 3 ENTER
             >;
         };
 
@@ -99,9 +99,9 @@
 
         symbol_layer_2 {
             bindings = <
-&trans                              &kp AT_SIGN                           &trans                                  &kp DOLLAR                          &trans    &trans     &trans  &trans  &trans  &trans
-&sticky_key_quick_release LEFT_ALT  &sticky_key_quick_release LEFT_SHIFT  &trans                                  &sticky_key_quick_release LEFT_WIN  &trans    &kp COLON  &trans  &trans  &trans  &trans
-&trans                              &trans                                &sticky_key_quick_release LEFT_CONTROL  &trans                              &trans    &trans     &trans  &trans  &trans  &trans
+&trans                              &trans                                &trans                                  &trans                              &trans    &trans     &trans       &trans      &trans  &trans
+&sticky_key_quick_release LEFT_ALT  &sticky_key_quick_release LEFT_SHIFT  &trans                                  &sticky_key_quick_release LEFT_WIN  &trans    &kp COLON  &kp AT_SIGN  &kp DOLLAR  &trans  &trans
+&trans                              &trans                                &sticky_key_quick_release LEFT_CONTROL  &trans                              &trans    &trans     &trans       &trans      &trans  &trans
                                                                                                                   &trans                              &trans    &trans     &trans
             >;
         };
