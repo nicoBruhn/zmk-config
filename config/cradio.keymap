@@ -45,18 +45,29 @@
             flavor = "tap-preferred";
             tapping-term-ms = <300>;
         };
+
+        sticky_hold: sticky_hold {
+            compatible = "zmk,behavior-hold-tap";
+            label = "STICKY_HOLD";
+            #binding-cells = <2>;
+            hold-while-undecided;
+            hold-while-undecided-linger;
+            bindings = <&kp>, <&sticky_key_quick_release>;
+
+            tapping-term-ms = <250>;
+        };
     };
 
     combos {
         compatible = "zmk,combos";
 
         mouse_layer {
-            bindings = <&mo 6>;
+            bindings = <&mo 5>;
             key-positions = <31 32>;
         };
 
         media_layer {
-            bindings = <&mo 5>;
+            bindings = <&mo 4>;
             key-positions = <30 33>;
         };
 
@@ -81,46 +92,37 @@
 
         default_layer {
             bindings = <
-&kp Q              &kp W  &kp_hold_kp F23 E  &kp R          &kp T             &kp Y        &kp U          &kp I      &kp_hold_kp F24 O  &kp P
-&kp_hold_kp F22 A  &kp S  &kp D              &kp F          &kp G             &kp H        &kp J          &kp K      &kp L              &kp SEMI
-&kp Z              &kp X  &kp C              &kp V          &kp B             &kp N        &kp M          &kp COMMA  &kp DOT            &kp FSLH
-                                             &kpml 4 SPACE  &kpml 1 ESCAPE    &kpml 2 TAB  &kpml 3 ENTER
-            >;
-        };
-
-        symbol_layer_1 {
-            bindings = <
-&kp RS(GRAVE)  &kp EXCLAMATION  &kp POUND      &kp QUESTION  &trans           &trans                &kp LEFT_BRACKET       &kp RIGHT_BRACKET  &kp LEFT_BRACE     &kp RIGHT_BRACE
-&kp CARET      &kp SLASH        &kp BACKSLASH  &kp PIPE      &kp AMPERSAND    &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp SINGLE_QUOTE   &kp DOUBLE_QUOTES  &kp UNDERSCORE
-&trans         &trans           &trans         &trans        &trans           &trans                &trans                 &trans             &trans             &trans
-                                               &trans        &trans           &trans                &trans
-            >;
-        };
-
-        symbol_layer_2 {
-            bindings = <
-&trans                              &trans                                &trans                                  &trans                              &trans    &trans     &trans       &trans      &trans  &trans
-&sticky_key_quick_release LEFT_ALT  &sticky_key_quick_release LEFT_SHIFT  &trans                                  &sticky_key_quick_release LEFT_WIN  &trans    &kp COLON  &kp AT_SIGN  &kp DOLLAR  &trans  &trans
-&trans                              &trans                                &sticky_key_quick_release LEFT_CONTROL  &trans                              &trans    &trans     &trans       &trans      &trans  &trans
-                                                                                                                  &trans                              &trans    &trans     &trans
-            >;
-        };
-
-        number_layer {
-            bindings = <
-&trans  &kp N7  &kp N8  &kp N9  &trans    &trans        &kp LESS_THAN  &kp GREATER_THAN  &kp TILDE  &trans
-&trans  &kp N4  &kp N5  &kp N6  &kp N0    &kp ASTERISK  &kp PLUS       &kp MINUS         &kp EQUAL  &kp PERCENT
-&trans  &kp N1  &kp N2  &kp N3  &trans    &trans        &trans         &trans            &trans     &trans
-                        &trans  &trans    &trans        &trans
+&kp Q              &kp W  &kp_hold_kp F23 E  &kp R          &kp T             &kp Y    &kp U          &kp I                        &kp_hold_kp F24 O      &kp P
+&kp_hold_kp F22 A  &kp S  &kp D              &kp F          &kp G             &kp H    &kp J          &kp K                        &kp L                  &kp LEFT_SHIFT
+&kp Z              &kp X  &kp C              &kp V          &kp B             &kp N    &kp M          &kp_hold_kp COMMA SEMICOLON  &kp_hold_kp DOT COLON  &kp FSLH
+                                             &kpml 1 SPACE  &kpml 2 ESCAPE    &kp TAB  &kpml 3 ENTER
             >;
         };
 
         special_layer {
             bindings = <
-&trans        &trans          &trans            &trans        &trans    &kp K_COPY      &kp K_UNDO  &trans        &trans     &kp K_PASTE
-&kp LEFT_ALT  &kp LEFT_SHIFT  &kp BACKSPACE     &kp LEFT_WIN  &trans    &kp LEFT_ARROW  &kp DOWN    &kp UP_ARROW  &kp RIGHT  &trans
-&trans        &kp DEL         &kp LEFT_CONTROL  &trans        &trans    &trans          &trans      &trans        &trans     &trans
-                                                &trans        &trans    &trans          &trans
+&trans                              &trans   &trans                          &trans                          &trans    &kp LC(C)       &kp LC(Z)  &trans        &trans     &kp LC(V)
+&sticky_hold LEFT_SHIFT LEFT_SHIFT  &trans   &kp BACKSPACE                   &sticky_hold LEFT_WIN LEFT_WIN  &trans    &kp LEFT_ARROW  &kp DOWN   &kp UP_ARROW  &kp RIGHT  &kp TAB
+&sticky_hold LCTRL LCTRL            &kp DEL  &sticky_hold LEFT_ALT LEFT_ALT  &kp LC(A)                       &trans    &trans          &trans     &trans        &trans     &trans
+                                                                             &trans                          &trans    &trans          &trans
+            >;
+        };
+
+        symbol_layer_1 {
+            bindings = <
+&trans     &kp EXCLAMATION  &kp POUND      &kp QUESTION  &trans           &trans                                          &kp AT_SIGN                             &kp DOLLAR                          &kp UNDERSCORE                          &trans
+&kp CARET  &kp SLASH        &kp BACKSLASH  &kp PIPE      &kp AMPERSAND    &kp_hold_kp LEFT_PARENTHESIS RIGHT_PARENTHESIS  &kp_hold_kp LEFT_BRACKET RIGHT_BRACKET  &kp_hold_kp LEFT_BRACE RIGHT_BRACE  &kp_hold_kp SINGLE_QUOTE DOUBLE_QUOTES  &kp GRAVE
+&trans     &trans           &trans         &trans        &trans           &trans                                          &trans                                  &trans                              &trans                                  &trans
+                                           &trans        &trans           &trans                                          &trans
+            >;
+        };
+
+        number_layer {
+            bindings = <
+&kp N1  &kp N2  &kp NUMBER_3   &kp N4            &kp N5    &kp N6        &kp N7    &kp N8     &kp N9     &kp N0
+&trans  &trans  &kp LESS_THAN  &kp GREATER_THAN  &trans    &kp ASTERISK  &kp PLUS  &kp MINUS  &kp EQUAL  &kp PERCENT
+&trans  &trans  &trans         &trans            &trans    &trans        &trans    &trans     &trans     &trans
+                               &trans            &trans    &trans        &trans
             >;
         };
 
