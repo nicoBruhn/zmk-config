@@ -1,6 +1,5 @@
 #include <dt-bindings/zmk/mouse.h>
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
@@ -74,19 +73,9 @@
             key-positions = <30 33>;
         };
 
-        boot_mode_right {
-            bindings = <&bootloader>;
-            key-positions = <5 9 6 7 8>;
-        };
-
-        boot_mode_left {
-            bindings = <&bootloader>;
-            key-positions = <0 1 2 3 4>;
-        };
-
-        reset_bt {
-            bindings = <&bt BT_CLR_ALL>;
-            key-positions = <0 1 2 7 8 9>;
+        unlock_studio {
+            bindings = <&studio_unlock>;
+            key-positions = <0 1 2>;
         };
     };
 
